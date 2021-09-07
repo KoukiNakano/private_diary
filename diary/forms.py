@@ -6,5 +6,6 @@ class InquiryForm(forms.Form):
     title = forms.CharField(label='タイトル',max_length=30)
     message = forms.CharField(label='メッセージ', widget=forms.Textarea)
 
+
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
