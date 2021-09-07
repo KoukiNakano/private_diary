@@ -1,0 +1,19 @@
+{% extends 'diary/base.html' %}
+{% load static %}
+
+{% block title %}お問い合わせ｜Private Diary{% endblock %}
+
+{% block contents %}
+        <!-- Content section 1-->
+        <section id="scroll">
+            <div class="container px-5">
+                <div class="row gx-5 align-items-center">
+                    <form method="POST">
+                        {% csrf_token %}
+                        {% for field in form %}
+
+                    </form>
+                </div>
+            </div>
+        </section>
+{% endblock %}
