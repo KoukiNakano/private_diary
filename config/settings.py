@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -125,3 +126,49 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+DEBUG = True
+
+ALLOWED_HOSTS = []
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_liggers': False,
+
+    'loggers': {
+        'django': {
+            'handlers':['console'],
+            'level': 'INFO',
+        },
+        'diary': {
+            'handlers':['console'],
+            'level': 'DEBUG',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StremHandler',
+            'formatter': 'dev'
+        },
+    },
+    'formatters': {
+        'dev': {
+            'format': '\t'.join([
+                '%(astime)s',
+                '[%(levelname)s]',
+                '%(pathname)s(Line:%(lineno)d)',
+                '%(message)s'
+            ])
+        },
+    }
+}
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'alert alert-danger',
+    messages.WARNING: 'alert alert-warning',
+    messages.SUCCESS: 'alert alert-success', 
+    messages.INFO: 'alert alert-info',
+}

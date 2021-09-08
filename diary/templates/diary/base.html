@@ -17,7 +17,7 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
         <!-- My style -->
-        <link rel="stylesheet" type="text/css" href="{% static 'css/mystyle.css' %}" />
+        <link href="{% static 'css/mystyle.css' %}"rel="stylesheet" />
         {% block head %}{% endblock %}
     </head>
     <body id="page-top">
@@ -29,10 +29,8 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <a class="nav-link" href="{% url 'diary:inquiry' %}">INQUIRY</a>
-                    <!---->
                     <ul class="navbar-nav ms-auto">
-                        
+                        <a class="nav-link" href="{% url 'diary:inquiry' %}">INQUIRY</a>
                         <li class="nav-item">
                             <a class="nav-link" href="#!">Sign Up</a>
                         </li>
@@ -45,6 +43,22 @@
         </nav>
         <!-- Header-->
         {% block header %}{% endblock %}
+
+        {% if messages %}
+        <div class="container">
+            <div class="row">
+                <div class="my-div-style w-100">
+                    <ul class="messages" style="list-style: none;">
+                        {% for message in messages %}
+                        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                            {{ message }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
         <!-- Content section 1-->
         {% block contents %}{% endblock %}
         <!-- Footer-->
@@ -57,3 +71,4 @@
         <script src="{% static 'js/scripts.js' %}"></script>
     </body>
 </html>
+<!--  -->
