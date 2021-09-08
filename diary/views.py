@@ -1,7 +1,7 @@
 #from django.http.response import HttpResponse
 import logging
 from django.urls import reverse_lazy
-#from django.shortcuts import render
+from django.shortcuts import render
 from django.views import generic
 from.forms import InquiryForm
 from django.contrib import messages
@@ -9,8 +9,8 @@ from django.contrib import messages
 logger = logging.getLogger(__name__)
 
 # Create your views here.
-#def index(request):
-    #return render(request, 'diary/index.html')
+def index(request):
+    return render(request, 'diary/index.html')
 
 class IndexView(generic.TemplateView):
     template_name = "diary/index.html"
