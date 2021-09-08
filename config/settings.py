@@ -127,13 +127,15 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
+#from.settings_common import *
+
 DEBUG = True
 
 ALLOWED_HOSTS = []
 
 LOGGING = {
     'version': 1,
-    'disable_existing_liggers': False,
+    'disable_existing_loggers': False,
 
     'loggers': {
         'django': {
@@ -148,14 +150,14 @@ LOGGING = {
     'handlers': {
         'console': {
             'level': 'DEBUG',
-            'class': 'logging.StremHandler',
+            'class': 'logging.StreamHandler',
             'formatter': 'dev'
         },
     },
     'formatters': {
         'dev': {
             'format': '\t'.join([
-                '%(astime)s',
+                '%(asctime)s',
                 '[%(levelname)s]',
                 '%(pathname)s(Line:%(lineno)d)',
                 '%(message)s'
