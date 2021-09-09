@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -42,9 +41,9 @@ INSTALLED_APPS = [
     'diary.apps.DiaryConfig',
     'accounts.apps.AccountsConfig',
 
-#    'django.contrib.sites',
-#    'allauth',
-#    'allauth.account',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
 ]
 
 MIDDLEWARE = [
@@ -134,45 +133,46 @@ STATICFILES_DIRS = (
 
 #from.settings_common import *
 
-DEBUG = True
+#DEBUG = True
 
-ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = []
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
+#LOGGING = {
+#    'version': 1,
+#    'disable_existing_loggers': False,
 
-    'loggers': {
-        'django': {
-            'handlers':['console'],
-            'level': 'INFO',
-        },
-        'diary': {
-            'handlers':['console'],
-            'level': 'DEBUG',
-        },
-    },
-    'handlers': {
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'dev'
-        },
-    },
-    'formatters': {
-        'dev': {
-            'format': '\t'.join([
-                '%(asctime)s',
-                '[%(levelname)s]',
-                '%(pathname)s(Line:%(lineno)d)',
-                '%(message)s'
-            ])
-        },
-    }
-}
+#    'loggers': {
+#        'django': {
+#            'handlers':['console'],
+#            'level': 'INFO',
+#        },
+#        'diary': {
+#            'handlers':['console'],
+#            'level': 'DEBUG',
+#        },
+#    },
+#    'handlers': {
+#        'console': {
+#            'level': 'DEBUG',
+#            'class': 'logging.StreamHandler',
+#            'formatter': 'dev'
+#        },
+#    },
+#    'formatters': {
+#        'dev': {
+#            'format': '\t'.join([
+#                '%(asctime)s',
+#                '[%(levelname)s]',
+#                '%(pathname)s(Line:%(lineno)d)',
+#                '%(message)s'
+#            ])
+#        },
+#    }
+#}
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
     messages.ERROR: 'alert alert-danger',
     messages.WARNING: 'alert alert-warning',
@@ -182,19 +182,15 @@ MESSAGE_TAGS = {
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
-#SITE_ID = 1
+SITE_ID = 1
+AUTHENTICATION_BACKENDS = (
+    'allauth.account.auth_backends.AuthenticationBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
-#AUTHENTICATION_BACKENDS = (
-#    'allauth.account.auth_backends.AuthenticationBackend',
-    #一般ユーザー用（メールアドレス認証）
-#    'django.contrib.auth.backends.ModelBackend',
-    #管理サイト用（ユーザー名認証）
-#)
-
-#メールアドレス認証に変更する設定
-#ACCOUNT_AUTHENTICATION_METHOD = 'email'
-#ACCOUNT_USERNAME_REQUIRED = False
-
-#サインアップにメールアドレス確認をはさむよう設定
-#ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-#ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_REQUIRED = True
+LOGIN_REDIRECT_URL = 'diary:index'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'account_login'
