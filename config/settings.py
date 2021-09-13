@@ -198,3 +198,5 @@ ACCOUNT_LOGOUT_ON_GET = True
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+LOGIN_REDIRECT_URL = 'diary:diary_list'
